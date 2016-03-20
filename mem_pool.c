@@ -330,7 +330,7 @@ alloc_pt mem_new_alloc(pool_pt pool, size_t size)
     (*alloc_node).alloc_record.size = size;
 
     // adjust node heap:
-    if(remaining_gap_size != NULL)
+    if(remaining_gap_size != 0)
     {//   if remaining gap, need a new node
         node_pt unused_node = NULL;
         for(int parser = 0; parser < (*pool_manager).total_nodes; parser++)
@@ -343,7 +343,6 @@ alloc_pt mem_new_alloc(pool_pt pool, size_t size)
         }
 
         //   make sure one was found
-        //assert(unused_node);
         if(unused_node == NULL)
         {//   make sure one was found
             return NULL;
@@ -436,7 +435,7 @@ alloc_status mem_del_alloc(pool_pt pool, alloc_pt alloc)
         alloc_status remove_status =
                 _mem_remove_from_gap_ix(pool_manager,
                                         (*prev_node).alloc_record.size,
-                                        prev_node)
+                                        prev_node);
 
         if(remove_status == ALLOC_FAIL)
         {//   check success
