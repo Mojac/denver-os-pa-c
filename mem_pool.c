@@ -277,9 +277,6 @@ alloc_pt mem_new_alloc(pool_pt pool, size_t size)
     // expand heap node, if necessary, quit on error
     _mem_resize_node_heap(pool_manager);
 
-    // check used nodes fewer than total nodes, quit on error
-
-
     // get a node for allocation:
     node_pt alloc_node = NULL;
 
@@ -343,7 +340,6 @@ alloc_pt mem_new_alloc(pool_pt pool, size_t size)
             }
         }
 
-        //   make sure one was found
         if(unused_node == NULL)
         {//   make sure one was found
             return NULL;
@@ -370,8 +366,6 @@ alloc_pt mem_new_alloc(pool_pt pool, size_t size)
 
         //   add to gap index
         _mem_add_to_gap_ix(pool_manager, remaining_gap_size, unused_node);
-
-        //   check if successful
     }
 
     // return allocation record by casting the node to (alloc_pt)
