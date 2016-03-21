@@ -479,18 +479,18 @@ void mem_inspect_pool(pool_pt pool,
                       unsigned *num_segments)
 {
     // get the mgr from the pool
-    pool_mgr_pt pool_magager = (pool_mgr_pt) pool;
+    pool_mgr_pt pool_manager = (pool_mgr_pt) pool;
 
     // allocate the segments array with size == used_nodes
     pool_segment_pt segs = (pool_segment_pt)
-            calloc((*pool_magager).used_nodes, sizeof(pool_segment_t));
+            calloc((*pool_manager).used_nodes, sizeof(pool_segment_t));
 
     if(segs == NULL)
     {// check successful
         return;
     }
 
-    node_pt current_node = (*pool_magager).node_heap;
+    node_pt current_node = (*pool_manager).node_heap;
     int index = 0;
     while(current_node != NULL)
     {//   loop through the node heap and the segments array
@@ -503,7 +503,7 @@ void mem_inspect_pool(pool_pt pool,
 
     // "return" the values:
     *segments = segs;
-    *num_segments = (*pool_magager).used_nodes;
+    *num_segments = (*pool_manager).used_nodes;
 
 }//End mem_inspect_pool
 
